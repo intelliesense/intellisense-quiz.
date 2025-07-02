@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Intelligence Type</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fff3e0, #fce4ec);
+      color: #333;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #d81b60;
+    }
+    .result-box {
+      background-color: #fce4ec;
+      border-left: 6px solid #d81b60;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #d81b60;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Your IntelliSense Results</h2>
+    <div id="results"></div>
+    <a class="button" href="quiz.html">Retake Quiz</a>
+  </div>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem('intelliSenseResult')) || {};
+    
+    const desc = {
+      "Musical": "You learn best through rhythm and sound. Try playing an instrument or using songs to study.",
+      "Visual-Spatial": "You think in images. Consider design, architecture, or using mind maps.",
+      "Interpersonal": "You relate well to others. Try teaching or collaborating often.",
+      "Intrapersonal": "You are reflective. Journaling and solo study will help you excel.",
+      "Logical-Mathematical": "You enjoy logic and reasoning. Excel in science, math, coding.",
+      "Linguistic-Verbal": "You’re strong with words. Read, write, and communicate ideas.",
+      "Naturalistic": "You connect with nature. Explore biology, agriculture, and sustainability.",
+      "Bodily-Kinesthetic": "You learn by doing. Sports, drama, and physical activities help you grow."
+    };
+
+    const books = {
+      "Musical": "“This Is Your Brain on Music” by Daniel J. Levitin",
+      "Visual-Spatial": "“Drawing on the Right Side of the Brain” by Betty Edwards",
+      "Interpersonal": "“Emotional Intelligence” by Daniel Goleman",
+      "Intrapersonal": "“The Power of Now” by Eckhart Tolle",
+      "Logical-Mathematical": "“Gödel, Escher, Bach” by Douglas Hofstadter",
+      "Linguistic-Verbal": "“On Writing” by Stephen King",
+      "Naturalistic": "“The Hidden Life of Trees” by Peter Wohlleben",
+      "Bodily-Kinesthetic": "“The Body Keeps the Score” by Bessel van der Kolk"
+    };
+
+    const courses = {
+      "Musical": "Music Production, Choir, Digital Audio",
+      "Visual-Spatial": "Graphic Design, Architecture, 3D Modelling",
+      "Interpersonal": "Leadership, Psychology, Social Studies",
+      "Intrapersonal": "Philosophy, Creative Writing, Self-Development",
+      "Logical-Mathematical": "Math, Computer Science, Robotics",
+      "Linguistic-Verbal": "Literature, Journalism, Debate",
+      "Naturalistic": "Biology, Environmental Science, Agriculture",
+      "Bodily-Kinesthetic": "Physical Education, Dance, Drama"
+    };
+
+    const careers = {
+      "Musical": "Music, sound engineering, or audio therapy might interest you.",
+      "Visual-Spatial": "You may enjoy design, architecture, or photography.",
+      "Interpersonal": "You might enjoy counseling, teaching, or human relations.",
+      "Intrapersonal": "Consider philosophy, writing, or independent study.",
+      "Logical-Mathematical": "You might enjoy programming, engineering, or research.",
+      "Linguistic-Verbal": "Explore journalism, law, or education.",
+      "Naturalistic": "Try biology, farming, or sustainability.",
+      "Bodily-Kinesthetic": "Explore sports, physiotherapy, or the arts."
+    };
+
+    const famousPeople = {
+      "Musical": "Ludwig van Beethoven, Beyoncé, Hans Zimmer",
+      "Visual-Spatial": "Leonardo da Vinci, Steve Jobs, Frank Lloyd Wright",
+      "Interpersonal": "Oprah Winfrey, Nelson Mandela, Michelle Obama",
+      "Intrapersonal": "Anne Frank, Sigmund Freud, Mahatma Gandhi",
+      "Logical-Mathematical": "Albert Einstein, Katherine Johnson, Ada Lovelace",
+      "Linguistic-Verbal": "J.K. Rowling, William Shakespeare, Maya Angelou",
+      "Naturalistic": "Jane Goodall, David Attenborough, Charles Darwin",
+      "Bodily-Kinesthetic": "Simone Biles, Bruce Lee, Serena Williams"
+    };
+
+    const resultsDiv = document.getElementById('results');
+
+    if (data.mainType) {
+      resultsDiv.innerHTML = `
+        <div class="result-box">
+          <strong>Main Intelligence:</strong> ${data.mainType}<br>${desc[data.mainType]}
+        </div>
+        <div class="result-box">
+          <strong>Other Strong Areas:</strong> ${data.otherTypes.join(", ")}
+        </div>
+        <div class="result-box">
+          <strong>Suggested Book to Strengthen ${data.weakest}:</strong><br>${books[data.weakest]}
+        </div>
+        <div class="result-box">
+          <strong>Recommended Grade 12 Courses:</strong><br>${courses[data.mainType]}
+        </div>
+        <div class="result-box">
+          <strong>Career Interest Hint:</strong><br>${careers[data.mainType]}
+        </div>
+        <div class="result-box">
+          <strong>Famous People With Strong ${data.mainType} Intelligence:</strong><br>${famousPeople[data.mainType]}
+        </div>
+      `;
+    } else {
+      resultsDiv.innerHTML = "<p>No result found. Please complete the quiz first.</p>";
+    }
+  </script>
+</body>
+</html>
